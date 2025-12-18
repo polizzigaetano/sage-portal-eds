@@ -1,0 +1,100 @@
+.search-bar-wrapper {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: var(--spacing-m);
+}
+
+.search-bar-container {
+  width: 100%;
+}
+
+.search-bar-form {
+  display: flex;
+  gap: var(--spacing-s);
+  width: 100%;
+}
+
+.search-bar-input-wrapper {
+  flex: 1;
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.search-bar-icon {
+  position: absolute;
+  left: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  pointer-events: none;
+}
+
+.search-bar-icon svg {
+  width: 20px;
+  height: 20px;
+  color: var(--text-color-secondary);
+}
+
+.search-bar-input {
+  width: 100%;
+  padding: 14px 16px 14px 48px;
+  background-color: var(--card-background-color);
+  border: 1px solid var(--card-border-color);
+  border-radius: var(--border-radius-m);
+  color: var(--text-color);
+  font-size: var(--body-font-size-s);
+  transition: border-color var(--transition-fast);
+}
+
+.search-bar-input::placeholder {
+  color: var(--text-color-secondary);
+}
+
+.search-bar-input:focus {
+  outline: none;
+  border-color: var(--accent-color);
+}
+
+/* Remove default search input styling */
+.search-bar-input::-webkit-search-cancel-button,
+.search-bar-input::-webkit-search-decoration {
+  appearance: none;
+}
+
+.search-bar-button {
+  flex-shrink: 0;
+  padding: 14px 32px;
+  background-color: var(--accent-color);
+  border: 2px solid var(--accent-color);
+  border-radius: var(--border-radius-pill);
+  color: var(--background-color);
+  font-size: var(--body-font-size-s);
+  font-weight: 600;
+  cursor: pointer;
+  transition: all var(--transition-fast);
+  margin: 0;
+}
+
+.search-bar-button:hover,
+.search-bar-button:focus {
+  background-color: var(--accent-hover-color);
+  border-color: var(--accent-hover-color);
+}
+
+@media (width >= 900px) {
+  .search-bar-wrapper {
+    padding: var(--spacing-m) var(--spacing-l);
+  }
+
+  .search-bar-input {
+    padding: 16px 20px 16px 52px;
+    font-size: var(--body-font-size-m);
+  }
+
+  .search-bar-button {
+    padding: 16px 40px;
+    font-size: var(--body-font-size-m);
+  }
+}
+

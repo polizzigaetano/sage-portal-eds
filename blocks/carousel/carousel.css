@@ -1,0 +1,147 @@
+.carousel-wrapper {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 var(--spacing-m);
+}
+
+.carousel-container {
+  position: relative;
+  background-color: var(--card-background-color);
+  border: 1px solid var(--card-border-color);
+  border-radius: var(--border-radius-l);
+  overflow: hidden;
+  padding: var(--spacing-l);
+}
+
+.carousel-slides {
+  position: relative;
+  min-height: 200px;
+}
+
+.carousel-slide {
+  display: none;
+  gap: var(--spacing-l);
+  align-items: center;
+  opacity: 0;
+  transition: opacity var(--transition-normal);
+}
+
+.carousel-slide.active {
+  display: flex;
+  flex-direction: column;
+  opacity: 1;
+  animation: slide-in var(--transition-normal) ease-out;
+}
+
+@media (width >= 900px) {
+  .carousel-slide.active {
+    flex-direction: row;
+  }
+}
+
+.carousel-slide-content {
+  flex: 1;
+}
+
+.carousel-slide-content h1,
+.carousel-slide-content h2,
+.carousel-slide-content h3 {
+  margin-top: 0;
+  margin-bottom: var(--spacing-s);
+  font-size: var(--heading-font-size-l);
+  font-weight: 700;
+  line-height: 1.2;
+}
+
+.carousel-slide-content p {
+  margin: 0;
+  color: var(--text-color-secondary);
+  font-size: var(--body-font-size-m);
+}
+
+.carousel-slide-image {
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.carousel-slide-image picture {
+  display: flex;
+}
+
+.carousel-slide-image img {
+  max-width: 200px;
+  max-height: 200px;
+  width: auto;
+  height: auto;
+  object-fit: contain;
+}
+
+@media (width >= 900px) {
+  .carousel-wrapper {
+    padding: 0 var(--spacing-l);
+  }
+
+  .carousel-container {
+    padding: var(--spacing-xl);
+  }
+
+  .carousel-slides {
+    min-height: 180px;
+  }
+
+  .carousel-slide-content h1,
+  .carousel-slide-content h2,
+  .carousel-slide-content h3 {
+    font-size: var(--heading-font-size-xl);
+  }
+
+  .carousel-slide-image img {
+    max-width: 280px;
+    max-height: 280px;
+  }
+}
+
+/* Pagination dots */
+.carousel-pagination {
+  display: flex;
+  justify-content: center;
+  gap: var(--spacing-xs);
+  margin-top: var(--spacing-l);
+  padding-top: var(--spacing-m);
+}
+
+.carousel-dot {
+  width: 10px;
+  height: 10px;
+  padding: 0;
+  margin: 0;
+  border: none;
+  border-radius: 50%;
+  background-color: var(--card-border-color);
+  cursor: pointer;
+  transition: all var(--transition-fast);
+}
+
+.carousel-dot:hover {
+  background-color: var(--text-color-secondary);
+}
+
+.carousel-dot.active {
+  background-color: var(--text-color);
+}
+
+/* Slide animations */
+@keyframes slide-in {
+  from {
+    opacity: 0;
+    transform: translateX(20px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+

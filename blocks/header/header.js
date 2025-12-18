@@ -104,6 +104,22 @@ function toggleMenu(nav, navSections, forceExpanded = null) {
 }
 
 /**
+ * Mark the current page's nav item as active
+ * @param {Element} nav The nav element
+ */
+function markActiveNavItem(nav) {
+  const currentPath = window.location.pathname;
+  const navLinks = nav.querySelectorAll('.nav-sections a');
+
+  navLinks.forEach((link) => {
+    const linkPath = new URL(link.href).pathname;
+    if (linkPath === currentPath || (currentPath === '/' && linkPath === '/')) {
+      link.parentElement.classList.add('active');
+    }
+  });
+}
+
+/**
  * loads and decorates the header, mainly the nav
  * @param {Element} block The header block element
  */
@@ -126,10 +142,12 @@ export default async function decorate(block) {
   });
 
   const navBrand = nav.querySelector('.nav-brand');
-  const brandLink = navBrand.querySelector('.button');
-  if (brandLink) {
-    brandLink.className = '';
-    brandLink.closest('.button-container').className = '';
+  if (navBrand) {
+    const brandLink = navBrand.querySelector('.button');
+    if (brandLink) {
+      brandLink.className = '';
+      brandLink.closest('.button-container').className = '';
+    }
   }
 
   const navSections = nav.querySelector('.nav-sections');
@@ -144,6 +162,9 @@ export default async function decorate(block) {
         }
       });
     });
+
+    // Mark active nav item
+    markActiveNavItem(nav);
   }
 
   // hamburger for mobile

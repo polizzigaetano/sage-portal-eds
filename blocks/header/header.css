@@ -2,8 +2,9 @@
 header .nav-wrapper {
   background-color: var(--background-color);
   width: 100%;
-  z-index: 2;
+  z-index: 100;
   position: fixed;
+  border-bottom: 1px solid var(--card-border-color);
 }
 
 header nav {
@@ -28,11 +29,12 @@ header nav[aria-expanded='true'] {
     'tools tools' var(--nav-height) / auto 1fr;
   overflow-y: auto;
   min-height: 100dvh;
+  background-color: var(--background-color);
 }
 
 @media (width >= 900px) {
   header .nav-wrapper {
-    position: relative;
+    position: fixed;
   }
 
   header nav {
@@ -54,8 +56,41 @@ header nav p {
   line-height: 1;
 }
 
-header nav a:any-link {
-  color: currentcolor;
+/* brand */
+header .nav-brand {
+  grid-area: brand;
+  flex-basis: 180px;
+  font-size: var(--body-font-size-m);
+  font-weight: 700;
+  line-height: 1;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+header .nav-brand a {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: var(--text-color);
+  text-decoration: none;
+  transition: color var(--transition-fast);
+}
+
+header .nav-brand a:hover {
+  color: var(--accent-color);
+}
+
+header .nav-brand .brand-text {
+  font-weight: 500;
+  font-size: var(--body-font-size-s);
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+header nav .nav-brand img {
+  width: 24px;
+  height: auto;
 }
 
 /* hamburger */
@@ -72,8 +107,8 @@ header nav .nav-hamburger button {
   border: 0;
   border-radius: 0;
   padding: 0;
-  background-color: var(--background-color);
-  color: inherit;
+  background-color: transparent;
+  color: var(--text-color);
   overflow: initial;
   text-overflow: initial;
   white-space: initial;
@@ -139,21 +174,7 @@ header nav[aria-expanded='true'] .nav-hamburger-icon::after {
   }
 }
 
-/* brand */
-header .nav-brand {
-  grid-area: brand;
-  flex-basis: 128px;
-  font-size: var(--heading-font-size-s);
-  font-weight: 700;
-  line-height: 1;
-}
-
-header nav .nav-brand img {
-  width: 128px;
-  height: auto;
-}
-
-/* sections */
+/* sections - navigation links */
 header nav .nav-sections {
   grid-area: sections;
   flex: 1 1 auto;
@@ -165,12 +186,14 @@ header nav[aria-expanded='true'] .nav-sections {
   display: block;
   visibility: visible;
   align-self: start;
+  padding-top: var(--spacing-m);
 }
 
 header nav .nav-sections ul {
   list-style: none;
   padding-left: 0;
   font-size: var(--body-font-size-s);
+  margin: 0;
 }
 
 header nav .nav-sections ul > li {
@@ -185,6 +208,35 @@ header nav .nav-sections ul > li > ul > li {
   font-weight: 400;
 }
 
+header nav .nav-sections a:any-link {
+  color: var(--text-color);
+  text-decoration: none;
+  transition: color var(--transition-fast);
+}
+
+header nav .nav-sections a:hover {
+  color: var(--accent-color);
+}
+
+/* Active nav item indicator */
+header nav .nav-sections .default-content-wrapper > ul > li.active > a,
+header nav .nav-sections .default-content-wrapper > ul > li:first-child > a {
+  color: var(--text-color);
+  position: relative;
+}
+
+header nav .nav-sections .default-content-wrapper > ul > li.active > a::after,
+header nav .nav-sections .default-content-wrapper > ul > li:first-child > a::after {
+  content: '';
+  position: absolute;
+  bottom: -4px;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background-color: var(--accent-color);
+  border-radius: 1px;
+}
+
 @media (width >= 900px) {
   header nav .nav-sections {
     display: block;
@@ -194,6 +246,7 @@ header nav .nav-sections ul > li > ul > li {
 
   header nav[aria-expanded='true'] .nav-sections {
     align-self: unset;
+    padding-top: 0;
   }
 
   header nav .nav-sections .nav-drop {
@@ -224,7 +277,7 @@ header nav .nav-sections ul > li > ul > li {
 
   header nav .nav-sections ul {
     display: flex;
-    gap: 24px;
+    gap: 32px;
     margin: 0;
   }
 
@@ -245,7 +298,9 @@ header nav .nav-sections ul > li > ul > li {
     width: 200px;
     top: 150%;
     padding: 16px;
-    background-color: var(--light-color);
+    background-color: var(--card-background-color);
+    border: 1px solid var(--card-border-color);
+    border-radius: var(--border-radius-m);
     white-space: initial;
   }
 
@@ -258,7 +313,7 @@ header nav .nav-sections ul > li > ul > li {
     height: 0;
     border-left: 8px solid transparent;
     border-right: 8px solid transparent;
-    border-bottom: 8px solid var(--light-color);
+    border-bottom: 8px solid var(--card-background-color);
   }
 
   header nav .nav-sections .default-content-wrapper > ul > li > ul > li {
@@ -269,4 +324,38 @@ header nav .nav-sections ul > li > ul > li {
 /* tools */
 header nav .nav-tools {
   grid-area: tools;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+header nav .nav-tools .user-greeting {
+  display: none;
+  align-items: center;
+  gap: 8px;
+  font-size: var(--body-font-size-s);
+  color: var(--text-color);
+}
+
+header nav .nav-tools .user-avatar {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background-color: var(--card-background-color);
+  border: 1px solid var(--card-border-color);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+header nav .nav-tools .user-avatar svg {
+  width: 18px;
+  height: 18px;
+  fill: var(--text-color-secondary);
+}
+
+@media (width >= 900px) {
+  header nav .nav-tools .user-greeting {
+    display: flex;
+  }
 }
